@@ -1,19 +1,48 @@
-import React, { useState } from "react";
-import Tables from "./TABLES.json";
-import { RefreshCw } from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 const Table = ({ tablename, access }) => {
-  // Initialize state with the data from the JSON file.
-  // const [data, setData] = useState(Tables[tablename] || []);
-  const data = Tables[tablename];
-  // `selectedRow` holds the index of the row being edited,
-  // or the string "new" when adding a new row.
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    async function fetchData() {
+      const url = `http://192.168.8.154:5445/select?name=${tablename}`;
+
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (Array.isArray(result)) {
+          setData(result);
+        } else {
+          console.error("Fetched data is not an array:", result);
+          setData([]); // Set empty array if data is invalid
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setData([]); // Handle error case by setting empty data
+      }
+    }
+
+    fetchData(); // Call fetchData directly
+  }, [tablename]); // Runs when `tablename` changes
+
   const [selectedRow, setSelectedRow] = useState(null);
   // `formData` holds the current values for the edit/create form.
   const [formData, setFormData] = useState({});
 
   // Get the column headers from the data.
   const headers = data.length > 0 ? Object.keys(data[0]) : [];
+  console.log(headers);
 
   // Triggered when clicking the "Edit" button in a row.
   const handleSelectRow = (index) => {
@@ -22,14 +51,34 @@ const Table = ({ tablename, access }) => {
   };
 
   // Triggered when clicking the "Delete" button in a row.
-  const handleDeleteRow = (index) => {
-    // const newData = data.filter((_, i) => i !== index);
-    RefreshCw();
-    // Clear any active edit if the deleted row was selected.
-    if (selectedRow === index) {
-      setSelectedRow(null);
-      setFormData({});
-    }
+  const handleDeleteRow = (condition) => {
+    const firstHeader = headers[0];
+    const rowToDelete = data[condition];
+    const conditionValue = rowToDelete[firstHeader];
+
+    // Construct the request body
+    const requestBody = {
+      name: tablename,
+      data: {
+        [firstHeader]: conditionValue, // Use the first header as the key and its value as the condition
+      },
+    };
+
+    console.log(requestBody);
+    fetch("http://192.168.8.154:5445/delete", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => response.json()) // Assuming the response is JSON
+      .then((data) => console.log(data)) // Handle the response data
+      .catch((error) => console.error("Error:", error)); // Handle errors
+
+    setSelectedRow(null);
+    setFormData({});
   };
 
   // Handle input changes in the edit/create form.
@@ -43,10 +92,26 @@ const Table = ({ tablename, access }) => {
   // Save changes after editing an existing row.
   const handleSaveEdit = () => {
     if (selectedRow === null) return;
-    const newData = data.map((item, i) =>
-      i === selectedRow ? formData : item
-    );
-    // setData(newData);
+
+    fetch("http://192.168.8.154:5445/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+      body: JSON.stringify({
+        name: `${tablename}`,
+        data: formData,
+      }),
+    })
+      .then((response) => response.json()) // Assuming the response is JSON
+      .then((data) => console.log(data)) // Handle the response data
+      .catch((error) => console.error("Error:", error)); // Handle errors
+
+    // const newData = data.map((item, i) =>
+    //   i === selectedRow ? formData : item
+    // );
+    // // setData(newData);
     setSelectedRow(null);
     setFormData({});
   };
@@ -55,7 +120,7 @@ const Table = ({ tablename, access }) => {
   const handleAddRow = () => {
     // Create an empty row object based on the headers.
     const emptyRow = {};
-    
+
     headers.forEach((header) => {
       emptyRow[header] = "";
     });
@@ -66,7 +131,21 @@ const Table = ({ tablename, access }) => {
 
   // Save a newly created row.
   const handleSaveNewRow = () => {
-    // setData([...data, formData]);
+    fetch("http://192.168.8.154:5445/insert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+      body: JSON.stringify({
+        name: `${tablename}`,
+        data: formData,
+      }),
+    })
+      .then((response) => response.json()) // Assuming the response is JSON
+      .then((data) => console.log(data)) // Handle the response data
+      .catch((error) => console.error("Error:", error)); // Handle errors
+
     setSelectedRow(null);
     setFormData({});
   };
@@ -138,8 +217,8 @@ const Table = ({ tablename, access }) => {
           <h2 className="mb-4 text-xl font-semibold">
             {selectedRow === "new" ? "Add New Row" : "Edit Row"}
           </h2>
-          <form method="POST" action="http://192.168.8.154:3000/insert">
-            {headers.map((header,idx) => (
+          <form>
+            {headers.map((header, idx) => (
               <div key={header} className="mb-2">
                 <label className="block font-medium mb-1">{header}</label>
                 <input
@@ -149,7 +228,6 @@ const Table = ({ tablename, access }) => {
                   onChange={handleInputChange}
                   className="border rounded px-2 py-1 w-full"
                 />
-              <button type="submit">New ro</button>
               </div>
             ))}
             <div className="mt-4">
@@ -187,5 +265,4 @@ const Table = ({ tablename, access }) => {
     </div>
   );
 };
-
 export default Table;

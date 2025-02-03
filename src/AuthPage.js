@@ -7,26 +7,46 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Simulated user database
-  const users = {
-    user1: '1111',
-    user2: '2222',
-    user3: '3333',
-  };
-
   // Function to handle login
-  const handleLogin = () => {
-    if (users[username] && users[username] === password) {
-      // Store user info in localStorage
-      localStorage.setItem('user', JSON.stringify({ username, password }));
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://192.168.8.154:5445/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-      // Redirect user to their page with username as parameter
-      navigate(`/home/${username}`);
-    } else {
-      setError('Invalid username or password!');
+      const data = await response.json();
+      
+      if (response.ok) {
+        // Store JWT token in localStorage
+        localStorage.setItem('token', data.token);
+        console.log(localStorage.getItem("token"))
+        // Redirect user to their page
+        navigate(`/home/${username}`);
+      } else {
+        setError(data.message || 'Invalid username or password!');
+      }
+    } catch (error) {
+      setError('Something went wrong. Please try again later.');
     }
   };
 
+  function decodeJWT(token) {
+    const [header, payload, signature] = token.split(".");
+    
+    const decodedHeader = JSON.parse(atob(header));
+    const decodedPayload = JSON.parse(atob(payload));
+  
+    return { header: decodedHeader, payload: decodedPayload, signature };
+  }
+  
+  const token = localStorage.getItem("token");
+  console.log(decodeJWT(token));
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin();

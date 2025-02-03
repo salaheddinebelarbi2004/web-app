@@ -1,27 +1,27 @@
 {
     "user1": {
-        "EMPLOYE": true,
-        "DEPARTEMENT": true,
-        "PRODUIT": true,
-        "CATEGORIE": true,
-        "FOURNISSEUR": true,
-        "Bon-SORTIE": true,
-        "SE REFERE": true,
-        "Bon-AFFECTATION": true,
-        "CONCERNER": true,
-        "COMMANDE": true,
-        "CONTENIR": true,
-        "Bon-LIVRAISON": true,
-        "RENFERMER": true
+        "employe": true,
+        "departement": true,
+        "produit": true,
+        "categorie": true,
+        "fournisseur": true,
+        "bon_sortie": true,
+        "se_refere": true,
+        "bon_affectation": true,
+        "concerner": true,
+        "commande": true,
+        "contenir": true,
+        "bon_livraison": true,
+        "renfermer": true
     },
     "user2": {
-        "EMPLOYE": true,
-        "DEPARTEMENT": true
+        "employe": true,
+        "departement": true
     },
     "user3": {
-        "FOURNISSEUR": true,
-        "EMPLOYE": false,
-        "DEPARTEMENT": false,
-        "Bon-LIVRAISON": false
+        "fournisseur": true,
+        "employe": false,
+        "departement": false,
+        "bon_livraison": false
     }
 }

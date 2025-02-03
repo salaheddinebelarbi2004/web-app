@@ -2,7 +2,7 @@
 import React from 'react';
 import './index.css'; 
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './AuthPage';
 import UserPage from './UserPage';
 import About from './about';
@@ -11,9 +11,11 @@ import Dashboard from './dashboard';
 import History from './history';
 
 function App() {
+  
   return (
     <Router>
       <Routes>
+        
         <Route path="/" element={<AuthPage />} />
         <Route path="/home/:userId" element={<UserPage />}>
           <Route path="dashboard/:table" element={<Dashboard />} />
