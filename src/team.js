@@ -1,8 +1,8 @@
 import React from 'react';
-import faycel from './photo_5794311736352949342_y.jpg'
-import bahaa from './bahaa.jpg'
-import khalil from './khalil.jpeg'
-import salah from './470202058_1318739862474627_1951536893600901282_n.jpg'
+import faycel from './photos/photo_5794311736352949342_y.jpg'
+import bahaa from './photos/bahaa.jpg'
+import khalil from './photos/khalil.jpeg'
+import salah from './photos/470202058_1318739862474627_1951536893600901282_n.jpg'
 import Navbar from './navbar';
 import { Quote } from 'lucide-react';
 const Team = () => {

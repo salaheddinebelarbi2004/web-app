@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react'; // Fix: Import Disclosure
-import logo from './image-removebg-preview.png'; // Fix: Import your logo (update path if needed)
+import logo from './photos/image-removebg-preview.png'; // Fix: Import your logo (update path if needed)
 
 // Helper function for classNames
 function classNames(...classes) {
@@ -16,9 +16,7 @@ export default function Navbar() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const [navigation] = useState([
-    { name: 'Home', href: user ? `/${user.username}` : '/' },
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'History', href: '/history' },
+    { name: 'Home', href: user ? `/home/${user.username}` : '/' },
     { name: 'About', href: '/about' },
     { name: 'Team', href: '/team' },
   ]);

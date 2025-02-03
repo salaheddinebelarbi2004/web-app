@@ -1,7 +1,14 @@
 // Table.js
 import React from 'react';
+import Tables from "./TABLES.json"
 
-const Table = ({ data }) => {
+const Table = ({ tablename }) => {
+  // WE get the name of the table
+  // And then we try to fetch the data
+  // TODO: FETCH DATA
+  // TODO: THIS SHOULD BE CHANGED TO FETCHING FROM THE API ENPONTS
+  const data = Tables[tablename]
+
   if (!data || data.length === 0) {
     return <p className="text-center text-gray-500">No data available</p>;
   }
@@ -28,6 +35,7 @@ const Table = ({ data }) => {
           ))}
         </tbody>
       </table>
+      
     </div>
   );
 };

@@ -1,0 +1,174 @@
+{
+  "EMPLOYE": [
+    {
+      "Code_emp": 1,
+      "Nom_emp": "Doe",
+      "Prenom_emp": "John",
+      "Grade_emp": "Senior",
+      "Fonction": "Manager",
+      "Code_dep": 101
+    },
+    {
+      "Code_emp": 2,
+      "Nom_emp": "Smith",
+      "Prenom_emp": "Alice",
+      "Grade_emp": "Junior",
+      "Fonction": "Analyst",
+      "Code_dep": 102
+    }
+  ],
+  "DEPARTEMENT": [
+    {
+      "Code_dep": 101,
+      "Intitule_dep": "Finance",
+      "Nom_chef": "Brown",
+      "Prenom_chef": "Robert"
+    },
+    {
+      "Code_dep": 102,
+      "Intitule_dep": "HR",
+      "Nom_chef": "Green",
+      "Prenom_chef": "Laura"
+    }
+  ],
+  "PRODUIT": [
+    {
+      "Code_PRO": "P001",
+      "Designation": "Laptop",
+      "Qte_stock": 50,
+      "Date_stock": "2024-10-01",
+      "seuil": 5,
+      "type": "Electronics",
+      "num_cat": 201
+    },
+    {
+      "Code_PRO": "P002",
+      "Designation": "Chair",
+      "Qte_stock": 30,
+      "Date_stock": "2024-10-02",
+      "seuil": 3,
+      "type": "Furniture",
+      "num_cat": 202
+    }
+  ],
+  "CATEGORIE": [
+    {
+      "num_cat": 201,
+      "categorie": "Electronics"
+    },
+    {
+      "num_cat": 202,
+      "categorie": "Furniture"
+    }
+  ],
+  "FOURNISSEUR": [
+    {
+      "Code_fournisseur": "F001",
+      "Nom_fournisseur": "TechSupply",
+      "Num_compte": "12345678",
+      "Num_Tel": "555-1234"
+    },
+    {
+      "Code_fournisseur": "F002",
+      "Nom_fournisseur": "OfficeFurnish",
+      "Num_compte": "87654321",
+      "Num_Tel": "555-5678"
+    }
+  ],
+  "Bon-SORTIE": [
+    {
+      "Num_bso": "BS001",
+      "Date_sor": "2024-10-05",
+      "Code_emp": 1
+    },
+    {
+      "Num_bso": "BS002",
+      "Date_sor": "2024-10-06",
+      "Code_emp": 2
+    }
+  ],
+  "SE REFERE": [
+    {
+      "Num_bso": "BS001",
+      "Code_PRO": "P001",
+      "Qte_sortie": 2
+    },
+    {
+      "Num_bso": "BS002",
+      "Code_PRO": "P002",
+      "Qte_sortie": 4
+    }
+  ],
+  "Bon-AFFECTATION": [
+    {
+      "Num_baf": "BA001",
+      "Date_aff": "2024-10-07",
+      "Code_emp": 1
+    },
+    {
+      "Num_baf": "BA002",
+      "Date_aff": "2024-10-08",
+      "Code_emp": 2
+    }
+  ],
+  "CONCERNER": [
+    {
+      "Num_baf": "BA001",
+      "Code_PRO": "P001",
+      "Qte_aff": 1
+    },
+    {
+      "Num_baf": "BA002",
+      "Code_PRO": "P002",
+      "Qte_aff": 2
+    }
+  ],
+  "COMMANDE": [
+    {
+      "Num_bco": "BC001",
+      "Date_com": "2024-10-09",
+      "Code_fournisseur": "F001"
+    },
+    {
+      "Num_bco": "BC002",
+      "Date_com": "2024-10-10",
+      "Code_fournisseur": "F002"
+    }
+  ],
+  "CONTENIR": [
+    {
+      "Num_bco": "BC001",
+      "Code_PRO": "P001",
+      "Qte_cde": 5
+    },
+    {
+      "Num_bco": "BC002",
+      "Code_PRO": "P002",
+      "Qte_cde": 6
+    }
+  ],
+  "Bon-LIVRAISON": [
+    {
+      "Num_bliv": "BL001",
+      "Date_liv": "2024-10-11",
+      "quantité": 10
+    },
+    {
+      "Num_bliv": "BL002",
+      "Date_liv": "2024-10-12",
+      "quantité": 8
+    }
+  ],
+  "RENFERMER": [
+    {
+      "Num_bliv": "BL001",
+      "Code_PRO": "P001",
+      "Qte_liv": 5
+    },
+    {
+      "Num_bliv": "BL002",
+      "Code_PRO": "P002",
+      "Qte_liv": 3
+    }
+  ]
+}
