@@ -1,5 +1,27 @@
 {
-    "user1": ["EMPLOYE","DEPARTEMENT","PRODUIT","CATEGORIE","FOURNISSEUR","Bon-SORTIE","SE REFERE","Bon-AFFECTATION","CONCERNER","COMMANDE","CONTENIR","Bon-LIVRAISON","RENFERMER"],
-    "user2": ["EMPLOYE","DEPARTEMENT"],
-    "user3": ["FOURNISSEUR","EMPLOYE","DEPARTEMENT","Bon-LIVRAISON"]
+    "user1": {
+        "EMPLOYE": true,
+        "DEPARTEMENT": true,
+        "PRODUIT": true,
+        "CATEGORIE": true,
+        "FOURNISSEUR": true,
+        "Bon-SORTIE": true,
+        "SE REFERE": true,
+        "Bon-AFFECTATION": true,
+        "CONCERNER": true,
+        "COMMANDE": true,
+        "CONTENIR": true,
+        "Bon-LIVRAISON": true,
+        "RENFERMER": true
+    },
+    "user2": {
+        "EMPLOYE": true,
+        "DEPARTEMENT": true
+    },
+    "user3": {
+        "FOURNISSEUR": true,
+        "EMPLOYE": false,
+        "DEPARTEMENT": false,
+        "Bon-LIVRAISON": false
+    }
 }

@@ -21,7 +21,7 @@ export default function AuthPage() {
       localStorage.setItem('user', JSON.stringify({ username, password }));
 
       // Redirect user to their page with username as parameter
-      navigate(`/user/${username}`);
+      navigate(`/home/${username}`);
     } else {
       setError('Invalid username or password!');
     }
