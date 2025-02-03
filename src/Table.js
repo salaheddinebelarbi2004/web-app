@@ -5,7 +5,7 @@ import { RefreshCw } from "lucide-react";
 const Table = ({ tablename, access }) => {
   // Initialize state with the data from the JSON file.
   // const [data, setData] = useState(Tables[tablename] || []);
-  const data = Tables[tablename]
+  const data = Tables[tablename];
   // `selectedRow` holds the index of the row being edited,
   // or the string "new" when adding a new row.
   const [selectedRow, setSelectedRow] = useState(null);
@@ -24,7 +24,7 @@ const Table = ({ tablename, access }) => {
   // Triggered when clicking the "Delete" button in a row.
   const handleDeleteRow = (index) => {
     // const newData = data.filter((_, i) => i !== index);
-    RefreshCw()
+    RefreshCw();
     // Clear any active edit if the deleted row was selected.
     if (selectedRow === index) {
       setSelectedRow(null);
@@ -55,9 +55,11 @@ const Table = ({ tablename, access }) => {
   const handleAddRow = () => {
     // Create an empty row object based on the headers.
     const emptyRow = {};
+    
     headers.forEach((header) => {
       emptyRow[header] = "";
     });
+    console.log(emptyRow);
     setSelectedRow("new");
     setFormData(emptyRow);
   };
@@ -136,8 +138,8 @@ const Table = ({ tablename, access }) => {
           <h2 className="mb-4 text-xl font-semibold">
             {selectedRow === "new" ? "Add New Row" : "Edit Row"}
           </h2>
-          <form>
-            {headers.map((header) => (
+          <form method="POST" action="http://192.168.8.154:3000/insert">
+            {headers.map((header,idx) => (
               <div key={header} className="mb-2">
                 <label className="block font-medium mb-1">{header}</label>
                 <input
@@ -147,6 +149,7 @@ const Table = ({ tablename, access }) => {
                   onChange={handleInputChange}
                   className="border rounded px-2 py-1 w-full"
                 />
+              <button type="submit">New ro</button>
               </div>
             ))}
             <div className="mt-4">
